@@ -12,7 +12,7 @@ function NhanVien(_taiKhoan, _tenNV, _email, _matKhau, _ngayLam, _luongCoBan, _c
 
     this.tinhTongLuong = function () {
         switch (this.chucVu) {
-            case "Giám đốc":
+            case "Sếp":
                 this.tongLuong = this.luongCoBan * 3;
                 break;
             case "Trưởng phòng":
@@ -21,6 +21,8 @@ function NhanVien(_taiKhoan, _tenNV, _email, _matKhau, _ngayLam, _luongCoBan, _c
             case "Nhân viên":
                 this.tongLuong = this.luongCoBan;
                 break;
+            default:
+                this.tongLuong = 0;
         }
         return this.tongLuong;
     };

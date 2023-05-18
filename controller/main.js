@@ -14,23 +14,28 @@ function layThongTinNV() {
     var _chucVu = getEle("chucvu").value;
     var _gioLam = getEle("gioLam").value;
 
-    var nv = new NhanVien(
-        _taiKhoan,
-        _tenNV,
-        _email,
-        _matKhau,
-        _ngayLam,
-        _luongCoBan,
-        _chucVu,
-        _gioLam
-    );
+    var nv = new NhanVien(_taiKhoan, _tenNV, _email, _matKhau, _ngayLam, _luongCoBan, _chucVu, _gioLam);
     nv.tinhTongLuong();
+    nv.xepLoai();
     return nv;
+};
+//Feature thêm nhân viên
+getEle("btnThemNV").addEventListener("click", function () {
+    var nv = layThongTinNV();
+    dsnv.themNV(nv);
+    renderTable(dsnv.arr);
+    setLocalStorage();
+});
+//Feature xoá nhân viên
+function deleteNV (tkNV) {
+    dsnv.xoaNV(tkNV);
+    renderTable(dsnv.arr);
+    setLocalStorage();
 };
 function renderTable(data) {
     var content = "";
     for (var i = 0; i < data.length; i++) {
-        var sv = data[i];
+        var nv = data[i];
         content += `
             <tr>
                 <td>${nv.taiKhoan}</td>
@@ -39,16 +44,25 @@ function renderTable(data) {
                 <td>${nv.ngayLam}</td>
                 <td>${nv.chucVu}</td>
                 <td>${nv.tongLuong}</td>
-                <td>${nv.loaiNhanVien}</td>        
+                <td>${nv.loaiNhanVien}</td>
+                <td>  
+                    <button class="btn btn-info" onclick="editNV('${nv.taiKhoan}')">Edit</button>                
+                    <button class="btn btn-danger" onclick="deleteNV('${nv.taiKhoan}')">Delete</button>
+                </td>
             </tr>
         `;
-
     }
     getEle("tableDanhSach").innerHTML = content;
 };
-getEle("btnThemNV").addEventListener("click", function () {
-    // var nv = layThongTinNV();
-    // dsnv.themNV(nv);
-    // renderTable(dsnv.arr);
-    console.log(123);
-});
+getLocalStorage();
+function setLocalStorage () {
+    var dataString = JSON.stringify(dsnv.arr);
+    localStorage.setItem("DSNV",dataString);
+};
+function getLocalStorage () {
+    if(localStorage.getItem("DSNV")) {
+        var dataString = localStorage.getItem("DSNV");
+        dsnv.arr = JSON.parse(dataString);
+        renderTable(dsnv.arr);
+    }
+};

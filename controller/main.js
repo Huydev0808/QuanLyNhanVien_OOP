@@ -32,13 +32,43 @@ function deleteNV (tkNV) {
     renderTable(dsnv.arr);
     setLocalStorage();
 };
+//Feature edit nhân viên
+function editNV (tkNV) {
+    var nv = dsnv.layThongTinNV(tkNV);
+    if(nv) {
+        getEle("tknv").value = nv.taiKhoan;
+        getEle("tknv").disabled = true;
+
+        getEle("btnThemNV").style.display = "none";
+
+        getEle("name").value = nv.tenNV;
+        getEle("email").value = nv.email;
+        getEle("password").value = nv.matKhau;
+        getEle("datepicker").value = nv.ngayLam;
+        getEle("luongCB").value = nv.luongCoBan;
+        getEle("chucvu").value = nv.chucVu;
+        getEle("gioLam").value = nv.gioLam;
+    }
+};
+getEle("btnCapNhat").addEventListener("click", function () {
+    var nv = layThongTinNV();
+    dsnv.capNhatNV(nv);
+    renderTable(dsnv.arr);
+    setLocalStorage();
+});
+//Feature tìm kiếm nhân viên
+getEle("searchName").addEventListener("click", function () {
+    var keyword = getEle("searchName").value;
+    var mangTimKiem = dsnv.timKiemSV(keyword);
+    renderTable(mangTimKiem);
+});
 function renderTable(data) {
     var content = "";
     for (var i = 0; i < data.length; i++) {
         var nv = data[i];
         content += `
             <tr>
-                <td>${nv.taiKhoan}</td>
+                <td>${nv.taiKhoan}</td
                 <td>${nv.tenNV}</td>
                 <td>${nv.email}</td>
                 <td>${nv.ngayLam}</td>
@@ -46,7 +76,7 @@ function renderTable(data) {
                 <td>${nv.tongLuong}</td>
                 <td>${nv.loaiNhanVien}</td>
                 <td>  
-                    <button class="btn btn-info" onclick="editNV('${nv.taiKhoan}')">Edit</button>                
+                    <button class="btn btn-info" onclick="editNV('${nv.taiKhoan}')" data-toggle="modal" data-target="#myModal">Edit</button>                
                     <button class="btn btn-danger" onclick="deleteNV('${nv.taiKhoan}')">Delete</button>
                 </td>
             </tr>

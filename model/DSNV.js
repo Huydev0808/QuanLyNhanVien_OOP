@@ -22,6 +22,33 @@ function DSNV () {
         }
         return null;
     };
-    this.suaNV = function () {};
-    this.capNhatNV = function () {};
+    this.layThongTinNV = function (tkNV) {
+        var index = this.timViTri(tkNV);
+        if (index !== -1) {
+            return this.arr[index];
+        }
+        return null;
+    };
+    this.capNhatNV = function (nv) {
+        var index = this.timViTri(nv.taiKhoan);
+        if (index !== -1) {
+            this.arr[index] = nv;
+        }
+    };
+};
+//Add phương thức và lớp đối tượng
+DSNV.prototype.timKiemNV = function (keyword) {
+    var mangTimKiem = [];
+    for (var i = 0; i < this.arr.length; i++) {
+        var nv = this.arr[i];
+        
+        var keywordLowerCase = keyword.toLowerCase()
+        
+        var tenSVToLowerCase = sv.tenSV.toLowerCase();
+        keyword = keyword.toLowerCase()
+        if (tenSVToLowerCase.indexOf(keywordLowerCase) !== -1) {
+            mangTimKiem.push(nv);
+        }
+    }
+    return mangTimKiem;
 };

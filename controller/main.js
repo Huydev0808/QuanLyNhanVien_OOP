@@ -40,7 +40,6 @@ function editNV (tkNV) {
         getEle("tknv").disabled = true;
 
         getEle("btnThemNV").style.display = "none";
-
         getEle("name").value = nv.tenNV;
         getEle("email").value = nv.email;
         getEle("password").value = nv.matKhau;
@@ -59,16 +58,19 @@ getEle("btnCapNhat").addEventListener("click", function () {
 //Feature tìm kiếm nhân viên
 getEle("searchName").addEventListener("click", function () {
     var keyword = getEle("searchName").value;
-    var mangTimKiem = dsnv.timKiemSV(keyword);
+    var mangTimKiem = dsnv.timKiemNV(keyword);
     renderTable(mangTimKiem);
 });
+/**
+ *               
+ */
 function renderTable(data) {
     var content = "";
     for (var i = 0; i < data.length; i++) {
         var nv = data[i];
         content += `
             <tr>
-                <td>${nv.taiKhoan}</td
+                <td>${nv.taiKhoan}</td>
                 <td>${nv.tenNV}</td>
                 <td>${nv.email}</td>
                 <td>${nv.ngayLam}</td>

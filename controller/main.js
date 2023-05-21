@@ -52,6 +52,16 @@ function layThongTinNV(isAdd) {
     return nv;
     
 };
+//Feature thêm nv hiển thị form 
+getEle("btnThem").addEventListener("click", function() {
+    //event.preventDefault();
+    getEle("tknv").disabled = false;
+    getEle("btnCapNhat").style.display = "none";
+    getEle("formNV").reset();
+    getEle("btnThemNV").style.display = "inline-block";
+
+
+});
 //Feature thêm nhân viên
 getEle("btnThemNV").addEventListener("click", function (event) {
     event.preventDefault();
@@ -70,6 +80,7 @@ function deleteNV (tkNV) {
 };
 //Feature edit nhân viên
 function editNV (tkNV) {
+    getEle("btnCapNhat").style.display = "inline-block";
     var nv = dsnv.layThongTinNV(tkNV);
     if(nv) {
         getEle("tknv").value = nv.taiKhoan;

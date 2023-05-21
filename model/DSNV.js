@@ -44,9 +44,9 @@ DSNV.prototype.timKiemNV = function (keyword) {
         
         var keywordLowerCase = keyword.toLowerCase()
         
-        var tenSVToLowerCase = sv.tenSV.toLowerCase();
+        var tenNVToLowerCase = nv.loaiNhanVien.toLowerCase();
         keyword = keyword.toLowerCase()
-        if (tenSVToLowerCase.indexOf(keywordLowerCase) !== -1) {
+        if (tenNVToLowerCase.indexOf(keywordLowerCase) !== -1) {
             mangTimKiem.push(nv);
         }
     }

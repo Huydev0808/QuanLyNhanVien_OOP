@@ -12,7 +12,7 @@ function NhanVien(_taiKhoan, _tenNV, _email, _matKhau, _ngayLam, _luongCoBan, _c
 
     this.tinhTongLuong = function () {
         switch (this.chucVu) {
-            case "Sếp":
+            case "Giám đốc":
                 this.tongLuong = this.luongCoBan * 3;
                 break;
             case "Trưởng phòng":
